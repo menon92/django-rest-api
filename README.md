@@ -108,7 +108,7 @@ $curl http://127.0.0.1:8000/values/
 ## Make a GET request on a single value
 
 ```bash
-$curl http://127.0.0.1:8000/values/28/
+$curl http://127.0.0.1:8000/values/52/
 ```
 ```json
 # response
