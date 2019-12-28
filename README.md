@@ -1,5 +1,5 @@
 # django-rest-api
-A django Rest API endpoints for GET, POST, PATCH
+A django Rest API endpoints to create a key-value store. Currently it support GET, POST, PATCH and DELETE
 
 
 ## Tested on
