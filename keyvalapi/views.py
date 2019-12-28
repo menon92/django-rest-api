@@ -59,12 +59,18 @@ class KeyValViewSet(viewsets.ModelViewSet):
         serializer = KeyValStoreSerializer(queryset, context={'request': request}, many=True)
         return Response(serializer.data)
 
-    # POST
+    # POST 
     def create(self, request):
-        print('on create')
+        print('on create')  
         # print(dir(request))
-        # print('data', request.data)
-        serializer = KeyValStoreSerializer(data=request.data, context={'request': request})
+        print('data', request.data)
+        print('type', type(request.data))
+        data = request.data
+        if not isinstance(data, list):
+            many = False
+        else:
+            many = True
+        serializer = KeyValStoreSerializer(data=data, context={'request': request}, many=many)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
