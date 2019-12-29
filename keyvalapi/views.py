@@ -18,7 +18,7 @@ def check_expiration(ttls):
     items = []
     for time in ttls:
         time_diff = now - datetime.timestamp(time['ttl'])
-        print('t_diff', time_diff)
+        # print('t_diff', time_diff)
         if time_diff >= FIVE_MIN:
             items.append(time['ttl'])
     return items
@@ -42,18 +42,18 @@ class KeyValViewSet(viewsets.ModelViewSet):
         for row in queryset:
             # print('ttl', row.ttl)
             if row.ttl in items_to_delete:
-                print('TTL is expare. so delete it')
+                # print('TTL is expare. so delete it')
                 row.delete()
             else:
                 KeyValStore.objects.filter(pk=row.id).update(ttl=datetime.now(timezone.utc))
-                print('TTL is updated..')
+                # print('TTL is updated..')
         # ---
         queryset = KeyValStore.objects.all()
         if keyParam is not None:
             keyParam = keyParam.split(',')
             keyFilter = KeyValStore.objects.filter(key__in=keyParam)
             queryset= self.filter_queryset(keyFilter)
-        print("Filterd queryset:",queryset)
+        # print("Filterd queryset:",queryset)
         # For get data as chunk
         # page = self.paginate_queryset(queryset)
         serializer = KeyValStoreSerializer(queryset, context={'request': request}, many=True)
@@ -63,8 +63,8 @@ class KeyValViewSet(viewsets.ModelViewSet):
     def create(self, request):
         print('on create')  
         # print(dir(request))
-        print('data', request.data)
-        print('type', type(request.data))
+        # print('data', request.data)
+        # print('type', type(request.data))
         data = request.data
         if not isinstance(data, list):
             many = False
@@ -86,11 +86,11 @@ class KeyValViewSet(viewsets.ModelViewSet):
         for row in queryset:
             # print('ttl', row.ttl)
             if row.ttl in items_to_delete:
-                print('TTL is expare. so delete it')
+                # print('TTL is expare. so delete it')
                 row.delete()
             else:
                 KeyValStore.objects.filter(pk=pk).update(ttl=datetime.now(timezone.utc))
-                print('TTL is updated..')
+                # print('TTL is updated..')
         # --- 
         queryset = KeyValStore.objects.all()
         kye_obj = get_object_or_404(queryset, pk=pk)
